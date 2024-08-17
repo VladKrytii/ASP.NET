@@ -17,19 +17,15 @@ namespace WebHalk.Controllers
             _hulkDbContext = hulkDbContext;
             _mapper = mapper;
         }
+
         public IActionResult Index()
         {
             var list = _hulkDbContext.Categories
                 .ProjectTo<CategoryItemViewModel>(_mapper.ConfigurationProvider)
-                //.Select(x=> new CategoryItemViewModel
-                //{
-                //    Id = x.Id,
-                //    Name = x.Name,
-                //    Image = x.Image
-                //})
                 .ToList();
             return View(list);
         }
+
         [HttpGet]
         public IActionResult Create()
         {
@@ -43,8 +39,7 @@ namespace WebHalk.Controllers
                 return View(model);
 
             string ext = System.IO.Path.GetExtension(model.Image.FileName);
-
-            string fileName = Guid.NewGuid().ToString()+ext;
+            string fileName = Guid.NewGuid().ToString() + ext;
 
             var path = Path.Combine(Directory.GetCurrentDirectory(), "images", fileName);
 
@@ -63,7 +58,6 @@ namespace WebHalk.Controllers
 
             return RedirectToAction(nameof(Index));
         }
-
 
         [HttpGet]
         public IActionResult Edit(int id)
@@ -105,7 +99,6 @@ namespace WebHalk.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-
         [HttpPost]
         public IActionResult Delete(int id)
         {
@@ -115,7 +108,6 @@ namespace WebHalk.Controllers
 
             var path = Path.Combine(Directory.GetCurrentDirectory(), "images", item.Image);
             if (System.IO.File.Exists(path)) System.IO.File.Delete(path);
-
 
             _hulkDbContext.Categories.Remove(item);
             _hulkDbContext.SaveChanges();

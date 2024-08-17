@@ -8,8 +8,10 @@ namespace WebHalk.Mapper
     {
         public AppMapProfile()
         {
-            CreateMap<CategoryEntity, CategoryItemViewModel>();
-            CreateMap<CategoryEntity, CategoryEditViewModel>();
+            CreateMap<Category, CategoryItemViewModel>()
+                .ForMember(dest => dest.Image, opt => opt.MapFrom(src => src.Image));
+
+            CreateMap<Category, CategoryEditViewModel>();
         }
     }
 }

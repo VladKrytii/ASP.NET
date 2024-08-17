@@ -14,5 +14,7 @@ namespace WebHalk.Data.Entities
 
         [StringLength(255)]
         public string Image { get; set; } = String.Empty;
+
+        public ICollection<Product> Products { get; set; } = new List<Product>();
     }
 }
