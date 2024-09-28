@@ -14,6 +14,5 @@ namespace WebHalk.Data.Entities
 
         [StringLength(255)]
         public string Image { get; set; } = String.Empty;
-        public virtual ICollection<ProductEntity>? Products { get; set; }
     }
 }
