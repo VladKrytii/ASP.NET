@@ -222,4 +222,11 @@ using (var scope = app.Services.CreateScope())
     }
 }
 
+app.UseSwagger();
+app.UseSwaggerUI(c =>
+{
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "ApiStore API V1");
+});
+
+
 app.Run();
